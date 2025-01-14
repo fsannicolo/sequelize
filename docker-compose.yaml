@@ -1,0 +1,17 @@
+services:
+  service1:
+    container_name: "server-node"
+    image: "node:latest"
+    volumes:
+      - volume1:/data
+
+  service2:
+    container_name: "server-mysql"
+    image: "mysql"
+    volumes:
+      - ./mydata:/data
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+volumes:
+  volume1:
