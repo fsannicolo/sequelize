@@ -1,17 +1,37 @@
 services:
-  service1:
-    container_name: "server-node"
-    image: "node:latest"
-    volumes:
-      - volume1:/data
+  node:
+    container_name: "node"
+    build: ./node
+    ports:
+      - "3000:3000"
+    networks:
+      - rete
+    depends_on:
+      - mysql
+    stdin_open: true
+    tty: true
 
-  service2:
-    container_name: "server-mysql"
-    image: "mysql"
-    volumes:
-      - ./mydata:/data
+  mysql:
+    container_name: "mysql"
+    build: ./mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=cisco
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - rete
+
+  nginx:
+    container_name: "nginx"
+    build: ./nginx
+    ports: 
+      - "80:80"
+    depends_on:
+      - node
 
 volumes:
-  volume1:
+  mysql-data:
+
+networks:
+  rete:
+    driver: bridge
