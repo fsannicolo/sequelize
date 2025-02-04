@@ -13,15 +13,18 @@ Aeroporto.init({
         type: DataTypes.STRING(20)
     },
     fkcategoria: {
-        type: DataTypes.TINYINT
+        type: DataTypes.TINYINT,
+        allowNull: false
     },
     fkcitta: {
-        type: DataTypes.SMALLINT
+        type: DataTypes.SMALLINT,
+        allowNull: false
     }
 },{
     sequelize, 
     modelName: 'Aeroporti',
-    tableName: 'Aeroporti'
+    tableName: 'Aeroporti',
+    timestamps: false
 })
 
 module.exports = Aeroporto;

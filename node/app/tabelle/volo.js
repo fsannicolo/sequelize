@@ -27,7 +27,8 @@ Volo.init({
 },{
     sequelize, 
     modelName: 'Voli',
-    tableName: 'Voli'
+    tableName: 'Voli',
+    timestamps: false
 })
 
 module.exports = Volo;

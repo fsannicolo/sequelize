@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS compagniaaerea;
+
 CREATE DATABASE compagniaaerea;
 
 USE compagniaaerea;
@@ -43,9 +45,6 @@ CREATE TABLE Categorie(
 	nome varchar(20)
 );
 
-
-
-
 CREATE TABLE Citta(
 	id smallint primary key auto_increment,
 	nome varchar(50),
@@ -81,8 +80,8 @@ ALTER TABLE Tappeintermedie ADD CONSTRAINT PKTappaintermedia PRIMARY KEY (fkvolo
 -- definizione vincoli foreign key
 -- ----------------------------------------
 
-ALTER TABLE Voli ADD CONSTRAINT FKVoloAreoportopartenza FOREIGN KEY (fkareoportopartenza) REFERENCES Aeroporti(codice);
-ALTER TABLE Voli ADD CONSTRAINT FKVoloAreoportoarrivo FOREIGN KEY (fkareoportoarrivo) REFERENCES Aeroporti(codice);
+ALTER TABLE Voli ADD CONSTRAINT FKVoloAreoportopartenza FOREIGN KEY (fkaeroportopartenza) REFERENCES Aeroporti(codice);
+ALTER TABLE Voli ADD CONSTRAINT FKVoloAreoportoarrivo FOREIGN KEY (fkaeroportoarrivo) REFERENCES Aeroporti(codice);
 
 ALTER TABLE Giornalieri ADD CONSTRAINT FKGiornalieroVolo FOREIGN KEY (fkvolo) REFERENCES Voli(id);
 
