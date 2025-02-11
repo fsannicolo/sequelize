@@ -1,5 +1,6 @@
 const db = require('./tabelle/associazioni');
 const express = require('express')
+const { Op } = require('sequelize')
 const app = express();
 app.use(express.json())     // aggiunge un middleware
 
@@ -89,8 +90,21 @@ app.post('/volo', async (req, res) => {
     }
 })
 
-app.get('/aeroporti', async (req, res) => {
-    res.json(await db.tabelle.Aeroporto.findAll());
+// mostra tutti i voli in partenza oggi
+app.get('/voli/:ora', async (req, res) => {
+    const ora = req.params.ora
+    res.json(await db.tabelle.Volo.findAll({
+        // where: {
+        //     orariopartenza: {
+        //         [Op.eq]: ora
+        //     }
+        // }
+
+        where: db.sequelize.where(
+            db.sequelize.fn('day', db.sequelize.col('orariopartenza')), 
+            {[Op.eq]: ora}
+        )
+    }));
 })
 
 app.listen(3000, () => {
