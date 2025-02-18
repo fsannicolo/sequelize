@@ -7,8 +7,8 @@ const sequelize = require('../config')
 
 Aeroporto.hasMany(Volo, {foreignKey: 'fkaeroportopartenza'});
 Aeroporto.hasMany(Volo, {foreignKey: 'fkaeroportoarrivo'});
-Volo.belongsTo(Aeroporto, {foreignKey: 'fkaeroportopartenza'});
-Volo.belongsTo(Aeroporto, {foreignKey: 'fkaeroportoarrivo'});
+Volo.belongsTo(Aeroporto, {as: 'partenza', foreignKey: 'fkaeroportopartenza'});
+Volo.belongsTo(Aeroporto, {as: 'arrivo', foreignKey: 'fkaeroportoarrivo'});
 
 Aeroporto.belongsTo(Categoria, {foreignKey: 'fkcategoria'});
 Categoria.hasMany(Aeroporto, {foreignKey: 'fkcategoria'});
